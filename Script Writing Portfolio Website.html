@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#000000" />
+
+<!-- ============ SEO ============ -->
+<title>Your Name — Scriptwriter | YouTube, Short-Form & Documentary Scripts</title>
+<meta name="description" content="Freelance scriptwriter helping creators and brands turn ideas into engaging, high-retention YouTube, short-form, storytelling and documentary scripts." />
+<meta name="author" content="Your Name" />
+<link rel="canonical" href="https://example.com/" />
+
+<!-- ============ Open Graph ============ -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Your Name — Scriptwriter" />
+<meta property="og:description" content="I write scripts that keep people watching. YouTube, short-form, storytelling and research-based scripts." />
+<meta property="og:url" content="https://example.com/" />
+<meta property="og:site_name" content="Your Name — Scriptwriter" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Your Name — Scriptwriter" />
+<meta name="twitter:description" content="I write scripts that keep people watching. YouTube, short-form, storytelling and research-based scripts." />
+
+<!-- ============ Fonts ============ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<style>
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+:root{
+  --bg:#000000;
+  --bg-soft:#060606;
+  --bg-card:#080808;
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(255,255,255,.16);
+  --text:#FFFFFF;
+  --muted:#CACACA;
+  --muted-dim:#5f5f5f;
+  --accent:#FF0000;          
+  --accent-soft:rgba(214,189,147,.09);
+  --danger:#e07a5f;
+
+  --radius-sm:10px;
+  --radius:14px;
+  --radius-lg:20px;
+
+  --max:1180px;
+  --nav-h:72px;
+
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+/* =========================================================
+   2. RESET & BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box;}
+
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-sans);
+  font-size:16px;
+  font-weight:400;
+  line-height:1.65;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+body.no-scroll{overflow:hidden;}
+
+h1,h2,h3,h4{margin:0;font-weight:500;line-height:1.15;letter-spacing:-.022em;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+img,svg{display:block;max-width:100%;}
+ul{margin:0;padding:0;list-style:none;}
+
+::selection{background:var(--accent);color:#000;}
+
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+[hidden]{display:none !important;}
+
+/* =========================================================
+   3. LAYOUT HELPERS
+   ========================================================= */
+.container{
+  width:100%;
+  max-width:var(--max);
+  margin-inline:auto;
+  padding-inline:24px;
+}
+
+section[id]{scroll-margin-top:calc(var(--nav-h) + 16px);}
+
+.section{padding:clamp(80px,11vw,140px) 0;}
+
+.section--tight{padding:clamp(64px,8vw,110px) 0;}
+
+.section__head{
+  max-width:640px;
+  margin-bottom:clamp(44px,6vw,72px);
+}
+
+.section__head--center{
+  margin-inline:auto;
+  text-align:center;
+}
+
+.eyebrow{
+  display:inline-block;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:18px;
+}
+
+.section__title{
+  font-size:clamp(30px,4.6vw,46px);
+  letter-spacing:-.03em;
+}
+
+.section__lead{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:15.5px;
+  max-width:56ch;
+}
+
+.section__head--center .section__lead{margin-inline:auto;}
+
+.serif{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:-.01em;
+}
+
+.accent{color:var(--accent);}
+
+.divider{
+  height:1px;
+  background:var(--line);
+  border:0;
+  margin:0;
+}
+
+/* =========================================================
+   4. BUTTONS
+   ========================================================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 28px;
+  border-radius:999px;
+  border:1px solid transparent;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.01em;
+  line-height:1;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:background .3s var(--ease), color .3s var(--ease),
+             border-color .3s var(--ease), transform .3s var(--ease),
+             box-shadow .3s var(--ease);
+}
+
+.btn svg{width:15px;height:15px;flex:none;}
+
+.btn--primary{
+  background:var(--accent);
+  color:#0a0a0a;
+  border-color:var(--accent);
+}
+.btn--primary:hover{
+  background:#e7d2ab;
+  border-color:#e7d2ab;
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px -14px rgba(214,189,147,.6);
+}
+
+.btn--ghost{
+  background:transparent;
+  border-color:var(--line-strong);
+  color:var(--text);
+}
+.btn--ghost:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+  background:var(--accent-soft);
+  transform:translateY(-2px);
+}
+
+.btn--sm{
+  padding:10px 18px;
+  font-size:13px;
+}
+
+.btn:active{transform:translateY(0);}
+
+/* =========================================================
+   5. NAVBAR
+   ========================================================= */
+.nav{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:100;
+  border-bottom:1px solid transparent;
+  transition:background .35s var(--ease), border-color .35s var(--ease),
+             backdrop-filter .35s var(--ease);
+}
+
+.nav.is-scrolled{
+  background:rgba(0,0,0,.72);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  backdrop-filter:blur(16px) saturate(140%);
+  border-bottom-color:var(--line);
+}
+
+.nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:var(--nav-h);
+}
+
+.logo{
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+}
+.logo__dot{color:var(--accent);margin-left:2px;}
+
+.nav__menu{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+
+.nav__link{
+  position:relative;
+  font-size:14px;
+  color:var(--muted);
+  transition:color .3s var(--ease);
+  padding:6px 0;
+}
+.nav__link::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:1px;
+  background:var(--accent);
+  transition:width .35s var(--ease);
+}
+.nav__link:hover{color:var(--text);}
+.nav__link:hover::after,
+.nav__link.is-active::after{width:100%;}
+.nav__link.is-active{color:var(--text);}
+
+.nav__hire{margin-left:6px;}
+
+/* Hamburger */
+.nav__toggle{
+  display:none;
+  width:44px;
+  height:44px;
+  margin-right:-10px;
+  position:relative;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+}
+.nav__toggle span{
+  position:absolute;
+  left:50%;
+  width:20px;
+  height:1.5px;
+  background:var(--text);
+  border-radius:2px;
+  transform:translateX(-50%);
+  transition:transform .3s var(--ease), opacity .25s var(--ease), background .3s var(--ease);
+}
+.nav__toggle span:nth-child(1){top:19px;}
+.nav__toggle span:nth-child(2){top:25px;}
+.nav__toggle.is-active span:nth-child(1){transform:translateX(-50%) translateY(3px) rotate(45deg);background:var(--accent);}
+.nav__toggle.is-active span:nth-child(2){transform:translateX(-50%) translateY(-3px) rotate(-45deg);background:var(--accent);}
+
+/* =========================================================
+   6. HERO
+   ========================================================= */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:calc(var(--nav-h) + 70px) 0 120px;
+  overflow:hidden;
+}
+
+/* subtle ambient glow */
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-28%;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(920px,130vw);
+  height:640px;
+  background:radial-gradient(circle at 50% 50%, rgba(214,189,147,.10), transparent 66%);
+  pointer-events:none;
+}
+
+.hero__inner{
+  position:relative;
+  z-index:1;
+  max-width:900px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 16px 7px 13px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.02);
+  font-size:12px;
+  letter-spacing:.06em;
+  color:var(--muted);
+  margin-bottom:34px;
+}
+
+.badge__dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 0 rgba(214,189,147,.5);
+  animation:pulse 2.6s ease-out infinite;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(214,189,147,.45);}
+  70%{box-shadow:0 0 0 9px rgba(214,189,147,0);}
+  100%{box-shadow:0 0 0 0 rgba(214,189,147,0);}
+}
+
+.hero__title{
+  font-size:clamp(38px,7.2vw,76px);
+  line-height:1.05;
+  letter-spacing:-.035em;
+  font-weight:500;
+}
+.hero__title em{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-weight:400;
+  color:var(--accent);
+  letter-spacing:-.015em;
+}
+
+.hero__sub{
+  margin:28px auto 0;
+  max-width:600px;
+  color:var(--muted);
+  font-size:clamp(15px,1.6vw,17px);
+  line-height:1.75;
+}
+
+.hero__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-top:42px;
+}
+
+/* scroll indicator */
+.scroll-cue{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  z-index:1;
+}
+.scroll-cue__text{
+  font-size:9.5px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+  transition:color .3s var(--ease);
+}
+.scroll-cue:hover .scroll-cue__text{color:var(--accent);}
+.scroll-cue__line{
+  position:relative;
+  display:block;
+  width:1px;
+  height:54px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(214,189,147,0) 0%, rgba(214,189,147,.65) 100%);
+}
+.scroll-cue__line::after{
+  content:'';
+  position:absolute;
+  left:0;
+  top:-60%;
+  width:1px;
+  height:60%;
+  background:#fff;
+  animation:cue 2.6s var(--ease) infinite;
+}
+@keyframes cue{
+  0%{transform:translateY(0);opacity:0;}
+  25%{opacity:1;}
+  100%{transform:translateY(280%);opacity:0;}
+}
+
+/* =========================================================
+   7. ABOUT
+   ========================================================= */
+.about__grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:clamp(40px,6vw,88px);
+  align-items:start;
+}
+
+.about__text p{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.8;
+}
+.about__text p + p{margin-top:20px;}
+
+.about__stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:36px;
+  margin-top:44px;
+  padding-top:32px;
+  border-top:1px solid var(--line);
+}
+.stat__num{
+  font-family:var(--font-serif);
+  font-size:32px;
+  color:var(--accent);
+  line-height:1;
+}
+.stat__label{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+}
+
+.specialty-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  background:var(--bg-card);
+  padding:clamp(26px,3.4vw,38px);
+}
+.specialty-card h3{
+  font-size:13px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+  font-weight:500;
+  margin-bottom:22px;
+}
+.specialty-list li{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:15px 0;
+  font-size:15px;
+  color:var(--text);
+  border-bottom:1px solid var(--line);
+}
+.specialty-list li:last-child{border-bottom:0;padding-bottom:0;}
+.specialty-list li:first-child{padding-top:0;}
+.specialty-list svg{
+  width:16px;
+  height:16px;
+  flex:none;
+  color:var(--accent);
+}
+
+/* =========================================================
+   8. SERVICES
+   ========================================================= */
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:clamp(26px,2.6vw,34px);
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  transition:border-color .4s var(--ease), transform .4s var(--ease),
+             background .4s var(--ease), box-shadow .4s var(--ease);
+}
+.card:hover{
+  border-color:rgba(214,189,147,.35);
+  background:#0b0b0b;
+  transform:translateY(-4px);
+  box-shadow:0 24px 50px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(214,189,147,.06);
+}
+
+.card__icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--accent);
+  margin-bottom:26px;
+  transition:border-color .4s var(--ease), background .4s var(--ease);
+}
+.card:hover .card__icon{
+  border-color:rgba(214,189,147,.35);
+  background:var(--accent-soft);
+}
+.card__icon svg{width:20px;height:20px;}
+
+.card h3{
+  font-size:17px;
+  margin-bottom:12px;
+  letter-spacing:-.015em;
+}
+.card p{
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.7;
+}
+
+/* =========================================================
+   9. PORTFOLIO
+   ========================================================= */
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.work-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:clamp(26px,2.6vw,34px);
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  transition:border-color .4s var(--ease), transform .4s var(--ease),
+             background .4s var(--ease), box-shadow .4s var(--ease);
+}
+.work-card:hover{
+  border-color:rgba(214,189,147,.35);
+  background:#0b0b0b;
+  transform:translateY(-4px);
+  box-shadow:0 28px 60px -34px rgba(0,0,0,1);
+}
+
+.work-card__top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:22px;
+}
+.work-card__cat{
+  font-size:10.5px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  padding:5px 11px;
+  border:1px solid rgba(214,189,147,.24);
+  border-radius:999px;
+  background:var(--accent-soft);
+  white-space:nowrap;
+}
+.work-card__index{
+  font-family:var(--font-serif);
+  font-size:14px;
+  color:var(--muted-dim);
+}
+
+.work-card h3{
+  font-size:19px;
+  line-height:1.35;
+  margin-bottom:12px;
+  letter-spacing:-.02em;
+}
+.work-card p{
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.72;
+}
+
+.work-card__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:26px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+}
+
+/* =========================================================
+   10. WHY WORK WITH ME
+   ========================================================= */
+.reason{
+  padding:30px 0 0;
+  border-top:1px solid var(--line);
+}
+.reason__icon{
+  color:var(--accent);
+  margin-bottom:20px;
+}
+.reason__icon svg{width:22px;height:22px;}
+.reason h3{
+  font-size:16.5px;
+  margin-bottom:10px;
+}
+.reason p{
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.72;
+}
+
+/* =========================================================
+   11. PROCESS
+   ========================================================= */
+.step{
+  position:relative;
+  padding:32px 0 0;
+  border-top:1px solid var(--line);
+}
+.step__num{
+  display:block;
+  font-family:var(--font-serif);
+  font-size:15px;
+  letter-spacing:.1em;
+  color:var(--accent);
+  margin-bottom:26px;
+}
+.step h3{
+  font-size:17px;
+  margin-bottom:10px;
+}
+.step p{
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.72;
+}
+
+/* =========================================================
+   12. TESTIMONIALS
+   ========================================================= */
+.quote-card{
+  display:flex;
+  flex-direction:column;
+  padding:clamp(26px,2.8vw,36px);
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  transition:border-color .4s var(--ease), transform .4s var(--ease), background .4s var(--ease);
+}
+.quote-card:hover{
+  border-color:rgba(214,189,147,.28);
+  background:#0b0b0b;
+  transform:translateY(-4px);
+}
+.quote-card__mark{
+  font-family:var(--font-serif);
+  font-size:40px;
+  line-height:1;
+  color:rgba(214,189,147,.4);
+  margin-bottom:16px;
+}
+.quote-card blockquote{
+  margin:0;
+  font-size:15.5px;
+  line-height:1.78;
+  color:#dedbd6;
+}
+.quote-card__author{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-top:28px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+}
+.avatar{
+  width:38px;
+  height:38px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid var(--line-strong);
+  font-size:12px;
+  letter-spacing:.06em;
+  color:var(--accent);
+  background:rgba(255,255,255,.02);
+}
+.author__name{font-size:14px;font-weight:500;}
+.author__role{font-size:12.5px;color:var(--muted-dim);}
+
+/* =========================================================
+   13. CTA
+   ========================================================= */
+.cta-box{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:clamp(52px,7vw,96px) clamp(24px,5vw,64px);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  background:var(--bg-soft);
+}
+.cta-box::before{
+  content:'';
+  position:absolute;
+  top:-60%;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(700px,120vw);
+  height:460px;
+  background:radial-gradient(circle at 50% 50%, rgba(214,189,147,.11), transparent 68%);
+  pointer-events:none;
+}
+.cta-box > *{position:relative;z-index:1;}
+.cta-box h2{
+  font-size:clamp(28px,4.4vw,44px);
+  letter-spacing:-.03em;
+  max-width:16ch;
+  margin-inline:auto;
+}
+.cta-box p{
+  margin:22px auto 0;
+  max-width:52ch;
+  color:var(--muted);
+  font-size:15.5px;
+  line-height:1.75;
+}
+.cta-box .btn{margin-top:38px;}
+
+/* =========================================================
+   14. CONTACT
+   ========================================================= */
+.contact__grid{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:clamp(40px,6vw,80px);
+  align-items:start;
+}
+
+.contact-list{margin-top:38px;}
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  transition:padding-left .3s var(--ease);
+}
+.contact-item:first-child{padding-top:0;}
+.contact-item:hover{padding-left:6px;}
+.contact-item__icon{
+  width:38px;
+  height:38px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:var(--accent);
+  transition:border-color .3s var(--ease), background .3s var(--ease);
+}
+.contact-item:hover .contact-item__icon{
+  border-color:rgba(214,189,147,.35);
+  background:var(--accent-soft);
+}
+.contact-item__icon svg{width:17px;height:17px;}
+.contact-item__label{
+  display:block;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+  margin-bottom:3px;
+}
+.contact-item__value{
+  font-size:15px;
+  color:var(--text);
+  transition:color .3s var(--ease);
+}
+.contact-item:hover .contact-item__value{color:var(--accent);}
+
+/* Form */
+.form{
+  padding:clamp(26px,3.4vw,40px);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  background:var(--bg-card);
+}
+
+.form__row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.field{margin-bottom:20px;}
+.field label{
+  display:block;
+  font-size:11.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+  margin-bottom:9px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:14px 16px;
+  font-family:inherit;
+  font-size:14.5px;
+  color:var(--text);
+  background:rgba(255,255,255,.015);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  transition:border-color .3s var(--ease), background .3s var(--ease), box-shadow .3s var(--ease);
+  appearance:none;
+  -webkit-appearance:none;
+}
+.field textarea{
+  resize:vertical;
+  min-height:130px;
+  line-height:1.65;
+}
+.field input::placeholder,
+.field textarea::placeholder{color:#4d4d4d;}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  outline:none;
+  border-color:rgba(214,189,147,.55);
+  background:rgba(255,255,255,.03);
+  box-shadow:0 0 0 3px rgba(214,189,147,.09);
+}
+
+.select-wrap{position:relative;}
+.select-wrap svg{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:14px;
+  height:14px;
+  color:var(--muted);
+  pointer-events:none;
+}
+.field select option{background:#0a0a0a;color:#f3f1ee;}
+
+.field__error{
+  display:block;
+  font-size:12.5px;
+  color:var(--danger);
+  margin-top:7px;
+  min-height:0;
+}
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea{
+  border-color:rgba(224,122,95,.6);
+}
+
+.form__submit{
+  width:100%;
+  margin-top:6px;
+}
+
+/* Success state */
+.form-success{
+  text-align:center;
+  padding:clamp(34px,5vw,54px) 20px;
+  animation:fadeUp .6s var(--ease) both;
+}
+.form-success__icon{
+  width:56px;
+  height:56px;
+  margin:0 auto 24px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(214,189,147,.4);
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+.form-success__icon svg{width:24px;height:24px;}
+.form-success h3{font-size:22px;margin-bottom:12px;}
+.form-success p{color:var(--muted);font-size:15px;max-width:38ch;margin-inline:auto;}
+.form-success .btn{margin-top:28px;}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:none;}
+}
+
+/* =========================================================
+   15. FOOTER
+   ========================================================= */
+.footer{
+  border-top:1px solid var(--line);
+  padding:44px 0;
+}
+.footer__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.footer__brand .logo{font-size:13px;}
+.footer__role{
+  display:block;
+  font-size:12.5px;
+  color:var(--muted-dim);
+  margin-top:8px;
+  letter-spacing:.04em;
+}
+.footer__copy{
+  font-size:12.5px;
+  color:var(--muted-dim);
+}
+.footer__socials{
+  display:flex;
+  gap:22px;
+}
+.footer__socials a{
+  font-size:12.5px;
+  color:var(--muted);
+  letter-spacing:.06em;
+  transition:color .3s var(--ease);
+}
+.footer__socials a:hover{color:var(--accent);}
+
+/* =========================================================
+   16. MODAL
+   ========================================================= */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .35s var(--ease), visibility .35s var(--ease);
+}
+.modal.is-open{opacity:1;visibility:visible;}
+
+.modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  cursor:pointer;
+}
+
+.modal__panel{
+  position:relative;
+  width:100%;
+  max-width:740px;
+  max-height:86vh;
+  overflow-y:auto;
+  padding:clamp(28px,4.4vw,52px);
+  background:#070707;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius-lg);
+  transform:translateY(16px) scale(.985);
+  transition:transform .4s var(--ease);
+  overscroll-behavior:contain;
+}
+.modal.is-open .modal__panel{transform:none;}
+
+.modal__close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  border:1px solid var(--line);
+  color:var(--muted);
+  background:rgba(0,0,0,.4);
+  transition:color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+}
+.modal__close:hover{
+  color:var(--accent);
+  border-color:rgba(214,189,147,.45);
+  transform:rotate(90deg);
+}
+.modal__close svg{width:16px;height:16px;}
+
+/* script typography inside modal */
+.script__meta{
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:16px;
+}
+.script__title{
+  font-size:clamp(22px,3.2vw,30px);
+  letter-spacing:-.025em;
+  margin-bottom:28px;
+  padding-bottom:26px;
+  border-bottom:1px solid var(--line);
+}
+.script__body h4{
+  font-size:11.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted-dim);
+  font-weight:500;
+  margin:30px 0 12px;
+}
+.script__body h4:first-child{margin-top:0;}
+.script__body p{
+  color:#c8c5c0;
+  font-size:15px;
+  line-height:1.85;
+  margin-bottom:14px;
+}
+.script__body p:last-child{margin-bottom:0;}
+
+/* =========================================================
+   17. SCROLL REVEAL
+   ========================================================= */
+.reveal{opacity:0;}
+.reveal.is-visible{
+  animation:revealUp .85s var(--ease) var(--d,0ms) both;
+}
+@keyframes revealUp{
+  from{opacity:0;transform:translateY(22px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* =========================================================
+   18. RESPONSIVE
+   ========================================================= */
+@media (max-width:1080px){
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(2,1fr);}
+  .about__grid{grid-template-columns:1fr;}
+  .contact__grid{grid-template-columns:1fr;}
+}
+
+@media (max-width:900px){
+  :root{--nav-h:66px;}
+
+  .nav__toggle{display:flex;}
+
+  .nav__menu{
+    position:fixed;
+    top:var(--nav-h);
+    left:0;
+    right:0;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:10px 24px 30px;
+    background:rgba(3,3,3,.97);
+    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+    transform:translateY(-10px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+  }
+  .nav__menu.is-open{
+    opacity:1;
+    transform:none;
+    visibility:visible;
+    pointer-events:auto;
+  }
+  .nav__link{
+    width:100%;
+    padding:16px 0;
+    font-size:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .nav__link::after{display:none;}
+  .nav__link.is-active{color:var(--accent);}
+  .nav__hire{
+    margin:24px 0 0;
+    width:100%;
+    padding:15px 28px;
+  }
+
+  .hero{padding-top:calc(var(--nav-h) + 56px);}
+  .scroll-cue{bottom:24px;}
+  .about__stats{gap:28px;}
+}
+
+@media (max-width:760px){
+  .grid-3{grid-template-columns:1fr;}
+  .form__row{grid-template-columns:1fr;gap:0;}
+}
+
+@media (max-width:560px){
+  .container{padding-inline:20px;}
+  .grid-4{grid-template-columns:1fr;}
+  .hero__actions{flex-direction:column;align-items:stretch;}
+  .hero__actions .btn{width:100%;}
+  .work-card__actions .btn{flex:1 1 auto;}
+  .about__stats{gap:24px;}
+  .stat__num{font-size:26px;}
+  .footer__inner{flex-direction:column;align-items:flex-start;gap:22px;}
+  .scroll-cue__line{height:40px;}
+}
+
+/* Large desktop breathing room */
+@media (min-width:1440px){
+  :root{--max:1240px;}
+  body{font-size:16.5px;}
+}
+
+/* =========================================================
+   19. REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;}
+  .reveal.is-visible{animation:none !important;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#home" class="logo" aria-label="Your Name — home">
+Harman Sindha<span class="logo__dot">.</span></a>
+
+    <nav class="nav__menu" id="navMenu" aria-label="Main navigation">
+      <a href="#home" class="nav__link">Home</a>
+      <a href="#about" class="nav__link">About</a>
+      <a href="#work" class="nav__link">Work</a>
+      <a href="#services" class="nav__link">Services</a>
+      <a href="#contact" class="nav__link">Contact</a>
+      <a href="#contact" class="btn btn--primary nav__hire">Hire Me</a>
+    </nav>
+
+    <button class="nav__toggle" id="navToggle" type="button"
+            aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero" id="home">
+    <div class="container hero__inner">
+      <span class="badge reveal">
+        <span class="badge__dot" aria-hidden="true"></span>
+        Available for new projects
+      </span>
+
+      <h1 class="hero__title reveal" style="--d:60ms">
+        I Write Scripts That <em>Keep People Watching.</em>
+      </h1>
+
+      <p class="hero__sub reveal" style="--d:120ms">
+        I’m a scriptwriter helping creators and brands turn ideas into engaging,
+        high-retention stories.
+      </p>
+
+      <div class="hero__actions reveal" style="--d:180ms">
+        <a href="#work" class="btn btn--primary">
+          View My Work
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn btn--ghost">Hire Me</a>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll down to about section">
+      <span class="scroll-cue__text">Scroll</span>
+      <span class="scroll-cue__line" aria-hidden="true"></span>
+    </a>
+  </section>
+
+  <!-- =========================================================
+       ABOUT
+       ========================================================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about__grid">
+
+        <div class="about__text reveal">
+          <span class="eyebrow">About</span>
+          <h2 class="section__title">Behind The Words</h2>
+
+          <p style="margin-top:24px;">
+            Hi, I’m Harman Sindha — a YouTube Script Writer specializing in Finance, Business, and Self-Improvement.
+
+</p>
+          <p>
+I help creators turn ideas into engaging, well-researched, and high-retention YouTube scripts designed to keep viewers watching.
+
+</p>
+          <p>
+My writing combines strong storytelling, audience psychology, and clear communication to make complex topics simple, interesting, and easy to follow.
+
+</p>
+          <p>
+
+What I Bring to Every Script
+</p>
+          <p>
+Strong Hooks — Opening lines that create curiosity and give viewers a reason to keep watching.
+</p>
+          <p>
+Research-Backed Writing — Well-researched and structured content that delivers value without overwhelming the audience.
+</p>
+          <p>
+Engaging Storytelling — Turning information into a narrative that feels natural, relatable, and worth watching.
+</p>
+          <p>
+Smooth Pacing & Flow — Clear transitions and purposeful writing that keep the script moving without unnecessary filler.
+</p>
+          <p>
+Simple, Conversational Language — Writing that sounds natural when spoken and connects with the target audience.
+</p>
+          <p>
+I believe a great YouTube script isn't just about putting information into words. It's about creating curiosity, building momentum, delivering value, and keeping the viewer engaged until the very end.
+</p>
+          <p>
+Whether you have a rough idea, a topic, or just a title, I can help turn it into a structured and compelling script ready for your audience.
+</p>
+          <p>
+Let's turn your next idea into a video people actually want to watch.
+
+          </p>
+
+          <div class="about__stats">
+            <div class="stat">
+              <span class="stat__num">50+</span>
+              <span class="stat__label">Scripts Written</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">25+</span>
+              <span class="stat__label">Creators &amp; Brands</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">2 Yrs</span>
+              <span class="stat__label">Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="specialty-card reveal" style="--d:100ms" aria-label="Areas of specialization">
+          <h3>Specialized In</h3>
+          <ul class="specialty-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Long-Form Scripts
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Short-Form Scripts
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Storytelling
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Research-Based Scripts
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Finance Scripts
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Business Scripts
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+              Self Improvement Scripts
+            </li>
+          </ul>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- =========================================================
+       SERVICES
+       ========================================================= -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Services</span>
+        <h2 class="section__title">What I Do</h2>
+        <p class="section__lead">
+          Focused writing services built around one goal — keeping the audience watching
+          until the very last second.
+        </p>
+      </div>
+
+      <div class="grid-4">
+
+        <!-- Service 01 -->
+        <article class="card reveal">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="4"/>
+              <path d="M10 9.5l5 2.5-5 2.5v-5z"/>
+            </svg>
+          </div>
+          <h3>Long-Form Scripts</h3>
+          <p>Detailed scripts for educational, informative, and storytelling videos designed to maintain viewer interest from start to finish.</p>
+        </article>
+
+        <!-- Service 02 -->
+        <article class="card reveal" style="--d:80ms">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13l0-8z"/>
+            </svg>
+          </div>
+          <h3>Short-Form Scripts</h3>
+          <p>Punchy scripts for YouTube Shorts, Reels, and short-form content with attention-grabbing hooks and concise storytelling.</p>
+        </article>
+
+        <!-- Service 03 -->
+        <article class="card reveal" style="--d:160ms">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5.5A2.5 2.5 0 016.5 3H12v18H6.5A2.5 2.5 0 014 18.5v-13z"/>
+              <path d="M20 5.5A2.5 2.5 0 0017.5 3H12v18h5.5A2.5 2.5 0 0020 18.5v-13z"/>
+            </svg>
+          </div>
+          <h3>Storytelling</h3>
+          <p>Transforming information into compelling narratives with curiosity loops, smooth pacing, and transitions that encourage viewers to keep watching.</p>
+        </article>
+
+        <!-- Service 04 -->
+        <article class="card reveal" style="--d:240ms">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="M20 20l-3.6-3.6"/>
+            </svg>
+          </div>
+          <h3>Research &amp; Script Development</h3>
+          <p>Well-researched ideas transformed into clear, compelling scripts.</p>
+        </article>  
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- =========================================================
+       PORTFOLIO / SELECTED WORK
+       ========================================================= -->
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Portfolio</span>
+        <h2 class="section__title">Selected Work</h2>
+        <p class="section__lead">
+          A selection of scripts across finance, psychology, business and storytelling.
+          Open any project to read a preview.
+        </p>
+      </div>
+
+      <div class="grid-3">
+
+        <!-- Project 01 -->
+        <article class="work-card reveal">
+          <div class="work-card__top">
+            <span class="work-card__cat">Finance / YouTube</span>
+            <span class="work-card__index">0</span>
+          </div>
+          <h3>Why Most People Never Get Rich</h3>
+          <p>A retention-focused YouTube script built around curiosity, storytelling and practical insights.</p>
+          <div class="work-card__actions">
+            <button class="btn btn--ghost btn--sm" type="button" data-script="p1"
+                    aria-label="Read the script for Why Most People Never Get Rich">Read Script</button>
+            <a class="btn btn--ghost btn--sm" href="#" aria-label="Watch the video (demo link)">Watch Video</a>
+          </div>
+        </article>
+
+        <!-- Project 02 -->
+        <article class="work-card reveal" style="--d:80ms">
+          <div class="work-card__top">
+            <span class="work-card__cat">Documentary</span>
+            <span class="work-card__index">02</span>
+          </div>
+          <h3>The Dark Side of Social Media</h3>
+          <p>A documentary-style script designed to build tension and keep viewers engaged.</p>
+          <div class="work-card__actions">
+            <button class="btn btn--ghost btn--sm" type="button" data-script="p2"
+                    aria-label="Read the script for The Dark Side of Social Media">Read Script</button>
+            <a class="btn btn--ghost btn--sm" href="#" aria-label="Watch the video (demo link)">Watch Video</a>
+          </div>
+        </article>
+
+        <!-- Project 03 -->
+        <article class="work-card reveal" style="--d:160ms">
+          <div class="work-card__top">
+            <span class="work-card__cat">Psychology</span>
+            <span class="work-card__index">03</span>
+          </div>
+          <h3>How Your Brain Tricks You</h3>
+          <p>An educational script using storytelling and curiosity-driven hooks.</p>
+          <div class="work-card__actions">
+            <button class="btn btn--ghost btn--sm" type="button" data-script="p3"
+                    aria-label="Read the script for How Your Brain Tricks You">Read Script</button>
+            <a class="btn btn--ghost btn--sm" href="#" aria-label="Watch the video (demo link)">Watch Video</a>
+          </div>
+        </article>
+
+        <!-- Project 04 -->
+        <article class="work-card reveal">
+          <div class="work-card__top">
+            <span class="work-card__cat">Business</span>
+            <span class="work-card__index">04</span>
+          </div>
+          <h3>The Rise and Fall of a Billion-Dollar Company</h3>
+          <p>A cinematic business story structured around conflict, suspense and payoff.</p>
+          <div class="work-card__actions">
+            <button class="btn btn--ghost btn--sm" type="button" data-script="p4"
+                    aria-label="Read the script for The Rise and Fall of a Billion-Dollar Company">Read Script</button>
+            <a class="btn btn--ghost btn--sm" href="#" aria-label="Watch the video (demo link)">Watch Video</a>
+          </div>
+        </article>
+
+        <!-- Project 05 -->
+        <article class="work-card reveal" style="--d:80ms">
+          <div class="work-card__top">
+            <span class="work-card__cat">Self Improvement</span>
+            <span class="work-card__index">05</span>
+          </div>
+          <h3>7 Habits Destroying Your Productivity</h3>
+          <p>A fast-paced YouTube script with strong hooks and actionable storytelling.</p>
+          <div class="work-card__actions">
+            <button class="btn btn--ghost btn--sm" type="button" data-script="p5"
+                    aria-label="Read the script for 7 Habits Destroying Your Productivity">Read Script</button>
+            <a class="btn btn--ghost btn--sm" href="#" aria-label="Watch the video (demo link)">Watch Video</a>
+          </div>
+        </article>
+
+        <!-- Project 06 -->
+        <article class="work-card reveal" style="--d:160ms">
+          <div class="work-card__top">
+            <span class="work-card__cat">Storytelling</span>
+            <span class="work-card__index">06</span>
+          </div>
+          <h3>The Truth About Overnight Success</h3>
+          <p>A motivational script built around an emotional narrative and strong conclusion.</p>
+          <div class="work-card__actions">
+            <button class="btn btn--ghost btn--sm" type="button" data-script="p6"
+                    aria-label="Read the script for The Truth About Overnight Success">Read Script</button>
+            <a class="btn btn--ghost btn--sm" href="#" aria-label="Watch the video (demo link)">Watch Video</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- =========================================================
+       WHY WORK WITH ME
+       ========================================================= -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Why Me</span>
+        <h2 class="section__title">Why Creators Work With Me</h2>
+      </div>
+
+      <div class="grid-4">
+
+        <article class="reason reveal">
+          <div class="reason__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v4"/>
+              <path d="M12 7c-3.3 0-6 2.5-6 5.6 0 3.1 2.7 5.6 6 5.6s6-2.5 6-5.6C18 9.5 15.3 7 12 7z"/>
+              <path d="M12 18.2V21"/>
+            </svg>
+          </div>
+          <h3>Strong Hooks</h3>
+          <p>Openings written to earn the next thirty seconds — and the thirty after that.</p>
+        </article>
+
+        <article class="reason reveal" style="--d:80ms">
+          <div class="reason__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19V5"/>
+              <path d="M4 15l5-5 3.5 3.5L20 6"/>
+              <path d="M20 11V6h-5"/>
+            </svg>
+          </div>
+          <h3>Retention-Focused Writing</h3>
+          <p>Every section has a purpose: set up curiosity, deliver value, keep momentum.</p>
+        </article>
+
+        <article class="reason reveal" style="--d:160ms">
+          <div class="reason__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l9 5-9 5-9-5 9-5z"/>
+              <path d="M3 13l9 5 9-5"/>
+            </svg>
+          </div>
+          <h3>Clear Storytelling</h3>
+          <p>Simple structure, clean pacing and a narrative that’s easy to follow.</p>
+        </article>
+
+        <article class="reason reveal" style="--d:240ms">
+          <div class="reason__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5.2l3.2 2"/>
+            </svg>
+          </div>
+          <h3>Reliable Delivery</h3>
+          <p>Clear timelines, quick revisions and scripts delivered when promised.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- =========================================================
+       PROCESS
+       ========================================================= -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Process</span>
+        <h2 class="section__title">Simple Process</h2>
+        <p class="section__lead">Four clear steps from a rough idea to a finished, ready-to-record script.</p>
+      </div>
+
+      <div class="grid-4">
+
+        <article class="step reveal">
+          <span class="step__num">01</span>
+          <h3>Tell Me Your Idea</h3>
+          <p>Share your topic, audience and goal. A short brief is enough to begin.</p>
+        </article>
+
+        <article class="step reveal" style="--d:80ms">
+          <span class="step__num">02</span>
+          <h3>Research &amp; Strategy</h3>
+          <p>I research the subject, study the angle and build the structure.</p>
+        </article>
+
+        <article class="step reveal" style="--d:160ms">
+          <span class="step__num">03</span>
+          <h3>Scriptwriting</h3>
+          <p>The full script is written with hooks, pacing and retention in mind.</p>
+        </article>
+
+        <article class="step reveal" style="--d:240ms">
+          <span class="step__num">04</span>
+          <h3>Final Delivery</h3>
+          <p>You receive a polished script, with revisions until it’s right.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- =========================================================
+       TESTIMONIALS
+       ========================================================= -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section__head section__head--center reveal">
+        <span class="eyebrow">Testimonials</span>
+        <h2 class="section__title">Client Feedback</h2>
+        <p class="section__lead">
+          Demo testimonials shown as placeholders. Replace them with real client feedback.
+        </p>
+      </div>
+
+      <div class="grid-3">
+
+        <article class="quote-card reveal">
+          <span class="quote-card__mark" aria-hidden="true">”</span>
+          <blockquote>
+            The hook alone lifted our average view duration noticeably. The script
+            was structured, clean and easy to narrate.
+          </blockquote>
+          <div class="quote-card__author">
+            <span class="avatar" aria-hidden="true">AR</span>
+            <span>
+              <span class="author__name">Client Name</span>
+              <span class="author__role">YouTube Creator · Demo testimonial</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="quote-card reveal" style="--d:80ms">
+          <span class="quote-card__mark" aria-hidden="true">”</span>
+          <blockquote>
+            Fast turnaround, zero fluff and a real understanding of pacing. The research
+            was thorough and the story flowed perfectly.
+          </blockquote>
+          <div class="quote-card__author">
+            <span class="avatar" aria-hidden="true">MK</span>
+            <span>
+              <span class="author__name">Client Name</span>
+              <span class="author__role">Brand Producer · Demo testimonial</span>
+            </span>
+          </div>
+        </article>
+
+        <article class="quote-card reveal" style="--d:160ms">
+          <span class="quote-card__mark" aria-hidden="true">”</span>
+          <blockquote>
+            Working together was effortless. Clear communication, on-time delivery and
+            scripts that actually sound like me.
+          </blockquote>
+          <div class="quote-card__author">
+            <span class="avatar" aria-hidden="true">SD</span>
+            <span>
+              <span class="author__name">Client Name</span>
+              <span class="author__role">Documentary Channel · Demo testimonial</span>
+            </span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA
+       ========================================================= -->
+  <section class="section section--tight" id="cta">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Have an Idea? Let’s Turn It Into a Story.</h2>
+        <p>
+          Tell me what you’re creating and I’ll help turn the idea into a script
+          people want to keep watching.
+        </p>
+        <a href="#contact" class="btn btn--primary">
+          Let’s Work Together
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT
+       ========================================================= -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact__grid">
+
+        <!-- Contact details -->
+        <div class="reveal">
+          <span class="eyebrow">Contact</span>
+          <h2 class="section__title">Let’s Work Together</h2>
+          <p class="section__lead">
+            Have a project in mind? Send a short message and I’ll reply within 24 hours.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <a class="contact-item" href="mailto:your@email.com">
+                <span class="contact-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="3"/>
+                    <path d="M3.5 7.5l8.5 6 8.5-6"/>
+                  </svg>
+                </span>
+                <span>
+                  <span class="contact-item__label">Email</span>
+                  <span class="contact-item__value">your@email.com</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="contact-item" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">
+                <span class="contact-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.5 8.5 0 01-12.6 7.4L3.5 20.5l1.7-4.7A8.5 8.5 0 1121 11.5z"/>
+                    <path d="M8.8 9.2c.3-.7 1.1-.8 1.4-.3l.7 1.2c.2.3.1.6-.1.9l-.4.5c.5 1 1.3 1.8 2.3 2.3l.5-.4c.3-.2.6-.3.9-.1l1.2.7c.5.3.4 1.1-.3 1.4-1.3.6-3-.2-4.6-1.7-1.5-1.6-2.3-3.3-1.6-4.5z"/>
+                  </svg>
+                </span>
+                <span>
+                  <span class="contact-item__label">WhatsApp</span>
+                  <span class="contact-item__value">+91 XXXXX XXXXX</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="contact-item" href="https://instagram.com/yourusername" target="_blank" rel="noopener">
+                <span class="contact-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.2" cy="6.8" r="1"/>
+                  </svg>
+                </span>
+                <span>
+                  <span class="contact-item__label">Instagram</span>
+                  <span class="contact-item__value">@yourusername</span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="contact-item" href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">
+                <span class="contact-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="4"/>
+                    <path d="M7.5 10.5V17"/>
+                    <path d="M7.5 7.6v.1"/>
+                    <path d="M11.5 17v-3.6a2.4 2.4 0 014.8 0V17"/>
+                  </svg>
+                </span>
+                <span>
+                  <span class="contact-item__label">LinkedIn</span>
+                  <span class="contact-item__value">Your Name</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact form -->
+        <div class="reveal" style="--d:100ms">
+          <div class="form" id="formWrap">
+            <form id="contactForm" novalidate>
+              <div class="form__row">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" />
+                  <span class="field__error" id="nameError" role="alert"></span>
+                </div>
+
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+                  <span class="field__error" id="emailError" role="alert"></span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="projectType">Project Type</label>
+                <div class="select-wrap">
+                  <select id="projectType" name="projectType">
+                    <option value="">Select a project type</option>
+                    <option value="YouTube Script">YouTube Script</option>
+                    <option value="Short-Form Scripts">Short-Form Scripts</option>
+                    <option value="Storytelling">Storytelling</option>
+                    <option value="Documentary / Educational">Documentary / Educational</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </div>
+                <span class="field__error" id="projectTypeError" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell me about your idea, audience and timeline…"></textarea>
+                <span class="field__error" id="messageError" role="alert"></span>
+              </div>
+
+              <button type="submit" class="btn btn--primary form__submit">
+                Send Inquiry
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- Success message (shown after valid submission) -->
+          <div class="form form-success" id="formSuccess" hidden aria-live="polite">
+            <div class="form-success__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12.5l5 5L20 6.5"/>
+              </svg>
+            </div>
+            <h3>Inquiry Sent</h3>
+            <p>Thanks for reaching out. Your message has been received and I’ll get back to you within 24 hours.</p>
+            <button type="button" class="btn btn--ghost btn--sm" id="resetForm">Send another inquiry</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#home" class="logo" aria-label="Your Name — back to top">YOUR NAME<span class="logo__dot">.</span></a>
+      <span class="footer__role">Scriptwriter</span>
+    </div>
+
+    <p class="footer__copy">© 2026 Your Name. All rights reserved.</p>
+
+    <nav class="footer__socials" aria-label="Social links">
+      <a href="https://instagram.com/yourusername" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:your@email.com">Email</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- =========================================================
+     SCRIPT MODAL
+     ========================================================= -->
+<div class="modal" id="modal" role="dialog" aria-modal="true"
+     aria-label="Script preview" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+
+  <div class="modal__panel">
+    <button class="modal__close" type="button" data-close aria-label="Close script preview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   SCRIPTWRITER PORTFOLIO — VANILLA JS
+   Sections:
+   1. Navbar scroll state
+   2. Mobile menu
+   3. Active nav link on scroll
+   4. Scroll reveal animations
+   5. Script modal (open / close / escape / focus trap)
+   6. Contact form validation + success message
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* -------------------------------------------------------
+     Prefers-reduced-motion check
+     ------------------------------------------------------- */
+  var prefersReducedMotion = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
+
+  /* =======================================================
+     1. NAVBAR — background on scroll
+     ======================================================= */
+  var nav = document.getElementById('nav');
+
+  function updateNavBackground() {
+    if (window.scrollY > 20) {
+      nav.classList.add('is-scrolled');
+    } else {
+      nav.classList.remove('is-scrolled');
+    }
+  }
+  updateNavBackground();
+
+  /* =======================================================
+     2. MOBILE MENU
+     ======================================================= */
+  var navToggle = document.getElementById('navToggle');
+  var navMenu = document.getElementById('navMenu');
+
+  function closeMenu() {
+    navMenu.classList.remove('is-open');
+    navToggle.classList.remove('is-active');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMenu() {
+    var isOpen = navMenu.classList.toggle('is-open');
+    navToggle.classList.toggle('is-active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  navToggle.addEventListener('click', toggleMenu);
+
+  // Close the menu when a link inside it is clicked
+  Array.prototype.forEach.call(navMenu.querySelectorAll('a'), function (link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close the menu when resizing back to desktop
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900) closeMenu();
+  });
+
+  /* =======================================================
+     3. ACTIVE NAV LINK WHILE SCROLLING
+     ======================================================= */
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+
+  function updateActiveLink() {
+    var scrollPos = window.scrollY + 130;
+    var currentId = sections.length ? sections[0].id : '';
+
+    sections.forEach(function (section) {
+      if (section.offsetTop <= scrollPos) currentId = section.id;
+    });
+
+    // Bottom of page → highlight the last section
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 4 && sections.length) {
+      currentId = sections[sections.length - 1].id;
+    }
+
+    navLinks.forEach(function (link) {
+      link.classList.toggle('is-active', link.getAttribute('href') === '#' + currentId);
+    });
+  }
+
+  /* =======================================================
+     SCROLL LISTENER (throttled with rAF)
+     ======================================================= */
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      updateNavBackground();
+      updateActiveLink();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  updateActiveLink();
+
+  /* =======================================================
+     4. SCROLL REVEAL ANIMATIONS
+     ======================================================= */
+  var revealElements = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
+  function finishReveal(el) {
+    // Remove animation classes so hover transforms keep working afterwards
+    el.classList.remove('reveal', 'is-visible');
+  }
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    // Reduced motion (or no IO support): show everything immediately
+    revealElements.forEach(function (el) {
+      el.style.opacity = '1';
+      el.classList.remove('reveal');
+    });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.classList.add('is-visible');
+        el.addEventListener('animationend', function () { finishReveal(el); }, { once: true });
+        revealObserver.unobserve(el);
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealElements.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  /* =======================================================
+     5. SCRIPT MODAL
+     ======================================================= */
+  var modal = document.getElementById('modal');
+  var modalBody = document.getElementById('modalBody');
+  var modalCloseBtn = modal.querySelector('.modal__close');
+  var lastFocusedElement = null;
+
+  /* --- Placeholder script content (edit freely) --- */
+  var SCRIPTS = {
+    p1: '<p class="script__meta">Finance / YouTube · Est. runtime 9 min</p>' +
+        '<h3 class="script__title">Why Most People Never Get Rich</h3>' +
+        '<div class="script__body">' +
+        '<h4>Hook (0:00 – 0:20)</h4>' +
+        '<p>In 2019, a thirty-one-year-old accountant sat down with a spreadsheet and realised something uncomfortable: after nine years of work, her net worth had barely moved. She wasn’t lazy. She wasn’t careless. She was simply following a set of rules that were never designed to make her rich.</p>' +
+        '<h4>The Real Problem (0:20 – 2:30)</h4>' +
+        '<p>Most financial advice focuses on saving. Cut the coffee, skip the takeaway, wait for the sale. But saving is a ceiling, not a ladder. The math is simple: you can only cut so much, and there is no limit to what you can build.</p>' +
+        '<p>The people who build wealth aren’t better at saving. They’re better at converting time, skills and attention into assets that keep paying after the work is done.</p>' +
+        '<h4>The Compounding Gap (2:30 – 6:00)</h4>' +
+        '<p>Here’s what nobody tells you: the gap between two people with the same income isn’t discipline. It’s the direction their money and time move in. One flows toward expenses. The other flows toward ownership.</p>' +
+        '<p>Over ten years, that gap becomes invisible. Over twenty, it becomes a different life.</p>' +
+        '<h4>Outro &amp; Call To Action (6:00 – 9:00)</h4>' +
+        '<p>You don’t need a bigger salary to change your outcome. You need a different destination for the money and time you already have. Start with one asset. Then let time do the rest.</p>' +
+        '<p>If this changed how you think about money, subscribe — the next script goes deeper into the assets most people overlook.</p>' +
+        '</div>',
+
+    p2: '<p class="script__meta">Documentary · Est. runtime 12 min</p>' +
+        '<h3 class="script__title">The Dark Side of Social Media</h3>' +
+        '<div class="script__body">' +
+        '<h4>Cold Open (0:00 – 0:25)</h4>' +
+        '<p>In 2004, a platform built to connect friends launched from a dorm room. Twenty years later, it holds the attention of three billion people — and it’s still learning how to keep them there.</p>' +
+        '<h4>Act One — The Promise (0:25 – 3:00)</h4>' +
+        '<p>The pitch was simple: stay close to the people you love. And it worked. For a while, the feed was a window into other lives, not a competition with them.</p>' +
+        '<p>Then the metric changed. Not connection — time. Not conversation — consumption.</p>' +
+        '<h4>Act Two — The Machinery (3:00 – 8:00)</h4>' +
+        '<p>Every scroll teaches the system something new. What makes you pause. What makes you angry. What makes you stay. The algorithm doesn’t want to entertain you. It wants to keep you.</p>' +
+        '<p>And it turns out the fastest way to keep someone is to make them feel something — even if that something is outrage, envy or fear.</p>' +
+        '<h4>Act Three — The Cost (8:00 – 11:00)</h4>' +
+        '<p>The cost isn’t measured in hours. It’s measured in attention, comparison and a quiet sense that everyone else is doing better than you are.</p>' +
+        '<h4>Close (11:00 – 12:00)</h4>' +
+        '<p>None of this makes the technology evil. It makes it powerful. And power always asks the same question: who’s holding the controls?</p>' +
+        '</div>',
+
+    p3: '<p class="script__meta">Psychology · Est. runtime 7 min</p>' +
+        '<h3 class="script__title">How Your Brain Tricks You</h3>' +
+        '<div class="script__body">' +
+        '<h4>Hook (0:00 – 0:20)</h4>' +
+        '<p>Right now, your brain is editing reality. Not slightly — constantly. And most of the time, you never notice it happening.</p>' +
+        '<h4>Part One — The Shortcut (0:20 – 2:30)</h4>' +
+        '<p>Your brain uses about twenty percent of your body’s energy. To survive that cost, it takes shortcuts. It fills gaps, assumes patterns and answers questions you never consciously asked.</p>' +
+        '<p>That’s efficient. It’s also why you remember a story differently every time you tell it.</p>' +
+        '<h4>Part Two — The Illusions (2:30 – 5:00)</h4>' +
+        '<p>Confirmation bias makes you collect evidence for what you already believe. The availability heuristic makes recent events feel more important than they are. And hindsight makes everything look obvious after the fact.</p>' +
+        '<h4>Part Three — Using It (5:00 – 7:00)</h4>' +
+        '<p>You can’t switch these shortcuts off. But you can learn to notice them — and the moment you notice a bias, it loses half its power.</p>' +
+        '</div>',
+
+    p4: '<p class="script__meta">Business · Est. runtime 14 min</p>' +
+        '<h3 class="script__title">The Rise and Fall of a Billion-Dollar Company</h3>' +
+        '<div class="script__body">' +
+        '<h4>Cold Open (0:00 – 0:30)</h4>' +
+        '<p>At its peak, the company was worth more than a billion dollars. Eighteen months later, it was gone. This is the story of how fast that can happen.</p>' +
+        '<h4>Act One — The Rise (0:30 – 4:30)</h4>' +
+        '<p>It started with a simple observation: an entire industry was running on outdated tools. The founders built something faster, cheaper and easier — and the market responded immediately.</p>' +
+        '<h4>Act Two — The Cracks (4:30 – 9:00)</h4>' +
+        '<p>Growth hides problems. Every new customer covered a flaw in the model. Then growth slowed — and the flaws became visible all at once.</p>' +
+        '<p>Costs were rising. Margins were shrinking. And the leadership kept promising a turnaround that the numbers no longer supported.</p>' +
+        '<h4>Act Three — The Fall (9:00 – 13:00)</h4>' +
+        '<p>The first layoffs were framed as strategy. The second round was framed as focus. The third round was the truth: the company was running out of runway.</p>' +
+        '<h4>Close (13:00 – 14:00)</h4>' +
+        '<p>The lesson isn’t that ambition fails. It’s that ambition without discipline always does — eventually.</p>' +
+        '</div>',
+
+    p5: '<p class="script__meta">Self Improvement · Est. runtime 8 min</p>' +
+        '<h3 class="script__title">7 Habits Destroying Your Productivity</h3>' +
+        '<div class="script__body">' +
+        '<h4>Hook (0:00 – 0:20)</h4>' +
+        '<p>You’re not lazy. You’re doing seven things every single day that quietly destroy your ability to focus. Here’s the first one — and it happens before you even get out of bed.</p>' +
+        '<h4>Habit 1–2 (0:20 – 2:30)</h4>' +
+        '<p>One: reaching for your phone before your first thought of the day. You start the morning responding instead of deciding.</p>' +
+        '<p>Two: confusing being busy with being effective. Motion feels like progress — until you measure the outcome.</p>' +
+        '<h4>Habit 3–5 (2:30 – 5:00)</h4>' +
+        '<p>Three: working without a defined finish line. Four: switching tasks every few minutes and paying a tax on every switch. Five: treating rest as a reward instead of a requirement.</p>' +
+        '<h4>Habit 6–7 (5:00 – 7:00)</h4>' +
+        '<p>Six: optimising your tools instead of your work. Seven: saying yes to everything and then wondering where the week went.</p>' +
+        '<h4>Outro (7:00 – 8:00)</h4>' +
+        '<p>Pick one. Fix it for a week. Then pick the next. Productivity isn’t a system you buy — it’s a set of habits you remove.</p>' +
+        '</div>',
+
+    p6: '<p class="script__meta">Storytelling · Est. runtime 6 min</p>' +
+        '<h3 class="script__title">The Truth About Overnight Success</h3>' +
+        '<div class="script__body">' +
+        '<h4>Hook (0:00 – 0:20)</h4>' +
+        '<p>Everyone called it an overnight success. Nobody mentioned the eleven years before it.</p>' +
+        '<h4>The Beginning (0:20 – 2:00)</h4>' +
+        '<p>She started in a small room with a borrowed laptop and an audience of nine people. For two years, nothing worked. Every video flopped. Every launch was quiet.</p>' +
+        '<h4>The Middle (2:00 – 4:00)</h4>' +
+        '<p>What changed wasn’t luck. It was repetition. She kept publishing, kept analysing, kept adjusting. The work compounded in a way that was invisible from the outside.</p>' +
+        '<h4>The Break (4:00 – 5:15)</h4>' +
+        '<p>Then one video did what the previous thousand couldn’t. And to everyone watching, it came from nowhere. To her, it came from everywhere — every failed attempt, every late night, every lesson.</p>' +
+        '<h4>Close (5:15 – 6:00)</h4>' +
+        '<p>Overnight success is real. It just takes a very long night. Keep going — the compounding is already happening.</p>' +
+        '</div>'
+  };
+
+  /* --- Open modal --- */
+  function openModal(scriptId) {
+    var content = SCRIPTS[scriptId];
+    if (!content) return;
+
+    modalBody.innerHTML = content;
+    lastFocusedElement = document.activeElement;
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+
+    // Move focus into the dialog
+    window.setTimeout(function () {
+      modalCloseBtn.focus();
+    }, 60);
+  }
+
+  /* --- Close modal --- */
+  function closeModal() {
+    if (!modal.classList.contains('is-open')) return;
+
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+
+    // Return focus to the element that opened the modal
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  }
+
+  // Delegated click: "Read Script" buttons + any [data-close] element
+  document.addEventListener('click', function (event) {
+    var trigger = event.target.closest('[data-script]');
+    if (trigger) {
+      event.preventDefault();
+      openModal(trigger.getAttribute('data-script'));
+      return;
+    }
+
+    if (event.target.closest('[data-close]')) {
+      event.preventDefault();
+      closeModal();
+    }
+  });
+
+  /* --- Escape key: closes modal and mobile menu --- */
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      closeModal();
+      closeMenu();
+    }
+  });
+
+  /* --- Simple focus trap inside the modal --- */
+  modal.addEventListener('keydown', function (event) {
+    if (event.key !== 'Tab' || !modal.classList.contains('is-open')) return;
+
+    var focusables = modal.querySelectorAll(
+      'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusables.length) return;
+
+    var first = focusables[0];
+    var last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  /* =======================================================
+     6. CONTACT FORM — validation + success message
+     ======================================================= */
+  var form = document.getElementById('contactForm');
+  var formWrap = document.getElementById('formWrap');
+  var formSuccess = document.getElementById('formSuccess');
+  var resetBtn = document.getElementById('resetForm');
+
+  var fields = {
+    name: {
+      el: document.getElementById('name'),
+      error: document.getElementById('nameError'),
+      validate: function (value) {
+        if (!value.trim()) return 'Please enter your name.';
+        if (value.trim().length < 2) return 'Name looks a little short.';
+        return '';
+      }
+    },
+    email: {
+      el: document.getElementById('email'),
+      error: document.getElementById('emailError'),
+      validate: function (value) {
+        if (!value.trim()) return 'Please enter your email.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
+          return 'Please enter a valid email address.';
+        }
+        return '';
+      }
+    },
+    projectType: {
+      el: document.getElementById('projectType'),
+      error: document.getElementById('projectTypeError'),
+      validate: function (value) {
+        if (!value) return 'Please select a project type.';
+        return '';
+      }
+    },
+    message: {
+      el: document.getElementById('message'),
+      error: document.getElementById('messageError'),
+      validate: function (value) {
+        if (!value.trim()) return 'Please add a short message.';
+        if (value.trim().length < 10) return 'A little more detail helps — at least 10 characters.';
+        return '';
+      }
+    }
+  };
+
+  /* Show / clear an error for a single field */
+  function setFieldError(field, message) {
+    var wrapper = field.el.closest('.field');
+    if (message) {
+      wrapper.classList.add('has-error');
+      field.error.textContent = message;
+      field.el.setAttribute('aria-invalid', 'true');
+    } else {
+      wrapper.classList.remove('has-error');
+      field.error.textContent = '';
+      field.el.removeAttribute('aria-invalid');
+    }
+  }
+
+  /* Validate every field, return true when the form is valid */
+  function validateForm() {
+    var isValid = true;
+    var firstInvalid = null;
+
+    Object.keys(fields).forEach(function (key) {
+      var field = fields[key];
+      var message = field.validate(field.el.value);
+      setFieldError(field, message);
+
+      if (message) {
+        isValid = false;
+        if (!firstInvalid) firstInvalid = field.el;
+      }
+    });
+
+    if (firstInvalid) firstInvalid.focus();
+    return isValid;
+  }
+
+  /* Clear a field's error as the user types / changes it */
+  Object.keys(fields).forEach(function (key) {
+    var field = fields[key];
+    var eventName = field.el.tagName === 'SELECT' ? 'change' : 'input';
+
+    field.el.addEventListener(eventName, function () {
+      if (field.el.closest('.field').classList.contains('has-error')) {
+        setFieldError(field, field.validate(field.el.value));
+      }
+    });
+  });
+
+  /* Handle submit */
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    if (!validateForm()) return;
+
+    // No backend: show a success message instead of sending data
+    formWrap.hidden = true;
+    formSuccess.hidden = false;
+    formSuccess.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'center'
+    });
+  });
+
+  /* Reset back to the form */
+  resetBtn.addEventListener('click', function () {
+    form.reset();
+    Object.keys(fields).forEach(function (key) { setFieldError(fields[key], ''); });
+    formSuccess.hidden = true;
+    formWrap.hidden = false;
+    fields.name.el.focus();
+  });
+
+  /* =======================================================
+     DEMO LINKS — prevent "#" placeholder links from jumping
+     ======================================================= */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#"]'), function (link) {
+    link.addEventListener('click', function (event) { event.preventDefault(); });
+  });
+
+})();
+</script>
+</body>
+</html>
