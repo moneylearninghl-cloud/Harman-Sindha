@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HARMAN — YouTube Thumbnail Designer</title>
+<meta name="description" content="HARMAN — YouTube Thumbnail Designer. Bold, high-quality thumbnails designed to make your videos stand out and get more clicks.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root{
+  --bg:        #000000;
+  --bg-soft:   #101012;
+  --card:      #151517;
+  --line:      rgba(255,255,255,.09);
+  --line-hover:rgba(255,255,255,.20);
+  --text:      #FFFFFF;
+  --muted:     #D5D5D5;
+  --accent:    #FF0000;
+  --radius:    18px;
+  --radius-sm: 14px;
+  --max:       1200px;
+  --nav-h:     72px;
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+
+::selection{ background:var(--accent); color:#fff; }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:6px; }
+
+/* ============================================================
+   3. LAYOUT HELPERS
+   ============================================================ */
+.container{
+  width:100%;
+  max-width:var(--max);
+  margin-inline:auto;
+  padding-inline:24px;
+}
+
+section{ padding: 100px 0; }
+
+.section-head{ max-width:660px; margin-bottom:56px; }
+
+.eyebrow{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:16px;
+}
+
+h1,h2,h3{
+  font-family:'Space Grotesk', 'Inter', sans-serif;
+  font-weight:700;
+  line-height:1.08;
+  letter-spacing:-.015em;
+}
+
+h1{ font-size:clamp(2.35rem, 6.2vw, 4.3rem); text-transform:uppercase; }
+h2{ font-size:clamp(1.7rem, 4vw, 2.65rem); text-transform:uppercase; }
+h3{ font-size:1.15rem; letter-spacing:-.01em; }
+
+p{ color:var(--muted); }
+.accent{ color:var(--accent); }
+
+/* ============================================================
+   4. ★ BULLETPROOF 16:9 THUMBNAIL WRAPPER ★
+   ============================================================ */
+.thumb-16x9{
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #1a1a1c;
+  border-radius: inherit;
+}
+
+.thumb-16x9 > img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(.2,.6,.2,1);
+}
+
+/* ============================================================
+   5. BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:15px 30px;
+  border-radius:999px;
+  font-size:.92rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  border:1px solid transparent;
+  transition:transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease, color .25s ease;
+  white-space:nowrap;
+}
+
+.btn-primary{ background:var(--accent); color:#fff; }
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,59,59,.28); }
+
+.btn-ghost{ border-color:var(--line); color:var(--text); }
+.btn-ghost:hover{ border-color:var(--line-hover); background:rgba(255,255,255,.04); transform:translateY(-2px); }
+
+.btn-sm{ padding:11px 22px; font-size:.85rem; }
+
+/* ============================================================
+   6. NAVBAR
+   ============================================================ */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  background:rgba(11,11,12,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{ display:flex; align-items:center; justify-content:space-between; width:100%; }
+
+.logo{
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  font-size:1.05rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.logo::after{
+  content:'';
+  display:inline-block;
+  width:6px; height:6px;
+  margin-left:7px;
+  border-radius:50%;
+  background:var(--accent);
+  vertical-align:middle;
+}
+
+.nav-links{ display:flex; align-items:center; gap:36px; list-style:none; }
+
+.nav-links a{
+  position:relative;
+  font-size:.88rem;
+  font-weight:500;
+  color:var(--muted);
+  transition:color .2s ease;
+  padding-bottom:4px;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0; bottom:0;
+  width:0; height:2px;
+  background:var(--accent);
+  transition:width .28s ease;
+}
+.nav-links a:hover,
+.nav-links a.active{ color:var(--text); }
+.nav-links a:hover::after,
+.nav-links a.active::after{ width:100%; }
+
+.menu-toggle{
+  display:none;
+  width:42px; height:42px;
+  position:relative;
+  border-radius:10px;
+  border:1px solid var(--line);
+}
+.menu-toggle span{
+  position:absolute;
+  left:50%;
+  width:18px; height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transform:translateX(-50%);
+  transition:transform .3s ease, opacity .3s ease, top .3s ease;
+}
+.menu-toggle span:nth-child(1){ top:14px; }
+.menu-toggle span:nth-child(2){ top:20px; }
+.menu-toggle span:nth-child(3){ top:26px; }
+
+.menu-toggle.active span:nth-child(1){ top:20px; transform:translateX(-50%) rotate(45deg); }
+.menu-toggle.active span:nth-child(2){ opacity:0; }
+.menu-toggle.active span:nth-child(3){ top:20px; transform:translateX(-50%) rotate(-45deg); }
+
+/* ============================================================
+   7. HERO
+   ============================================================ */
+.hero{ padding: 88px 0 104px; }
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  gap:clamp(36px, 5vw, 68px);
+  align-items:center;
+}
+
+.hero p.sub{
+  font-size:clamp(1rem, 1.6vw, 1.09rem);
+  max-width:520px;
+  margin:26px 0 38px;
+}
+
+.hero-actions{ display:flex; flex-wrap:wrap; gap:14px; }
+
+.collage{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+.collage figure{
+  position:relative;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--line);
+  overflow:hidden;
+  background:var(--card);
+}
+.collage figure:first-child{ grid-column: span 2; }
+
+.collage figure:hover .thumb-16x9 > img{ transform:scale(1.05); }
+
+/* ============================================================
+   8. PORTFOLIO / WORK
+   (title/category overlay removed — sirf clean thumbnails)
+   ============================================================ */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(290px, 1fr));
+  gap:22px;
+}
+
+.work-card{
+  position:relative;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:var(--card);
+  cursor:pointer;
+  overflow:hidden;
+  transition:border-color .3s ease, transform .3s ease;
+}
+.work-card:hover{
+  border-color:var(--line-hover);
+  transform:translateY(-4px);
+}
+.work-card:hover .thumb-16x9 > img{ transform:scale(1.07); }
+
+/* ============================================================
+   9. BEFORE / AFTER
+   ============================================================ */
+.ba-item{ margin-bottom:56px; }
+.ba-item:last-child{ margin-bottom:0; }
+
+.ba-title{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1rem;
+  font-weight:600;
+  color:var(--text);
+  letter-spacing:.02em;
+  margin-bottom:18px;
+}
+
+.ba-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.ba-card{
+  position:relative;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--card);
+}
+
+.ba-label{
+  position:absolute;
+  top:12px; left:12px;
+  z-index:2;
+  padding:6px 13px;
+  border-radius:999px;
+  font-size:.66rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#fff;
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.ba-label.after{ background:var(--accent); }
+
+/* ============================================================
+   10. SERVICES
+   ============================================================ */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
+  gap:22px;
+}
+
+.service-card{
+  padding:36px 32px 38px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  transition:border-color .3s ease, transform .3s ease, background .3s ease;
+}
+.service-card:hover{
+  border-color:var(--line-hover);
+  transform:translateY(-5px);
+  background:#171719;
+}
+
+.service-num{
+  display:block;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  color:var(--accent);
+  margin-bottom:22px;
+}
+.service-card h3{ margin-bottom:12px; font-size:1.2rem; }
+.service-card p{ font-size:.94rem; }
+
+/* ============================================================
+   11. ABOUT
+   ============================================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(30px, 5vw, 70px);
+  align-items:center;
+}
+
+.about-text p{
+  font-size:clamp(1rem, 1.5vw, 1.1rem);
+  max-width:520px;
+}
+
+.stats{ display:flex; flex-wrap:wrap; gap:44px; margin-top:44px; }
+.stat strong{
+  display:block;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:clamp(1.6rem, 3vw, 2.1rem);
+  font-weight:700;
+  line-height:1.1;
+}
+.stat span{
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.about-visual{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--card);
+}
+.about-visual img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+}
+
+/* ============================================================
+   12. TESTIMONIALS
+   ============================================================ */
+.testimonials-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:22px;
+}
+
+.testimonial{
+  padding:34px 30px 30px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  transition:border-color .3s ease, transform .3s ease;
+}
+.testimonial:hover{
+  border-color:var(--line-hover);
+  transform:translateY(-4px);
+}
+
+.testimonial blockquote{
+  font-size:.97rem;
+  color:#D9D9DE;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+.testimonial blockquote::before{
+  content:'"';
+  color:var(--accent);
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1.6rem;
+  line-height:0;
+  vertical-align:-.15em;
+  margin-right:2px;
+}
+
+.testimonial figcaption strong{
+  display:block;
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--text);
+}
+.testimonial figcaption span{
+  font-size:.79rem;
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+
+/* ============================================================
+   13. CONTACT / CTA
+   ============================================================ */
+.cta{ text-align:center; }
+.cta h2{ max-width:760px; margin-inline:auto; }
+.cta p{
+  max-width:520px;
+  margin:24px auto 40px;
+  font-size:1.05rem;
+}
+.cta-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+}
+
+/* ============================================================
+   14. FOOTER
+   ============================================================ */
+.footer{
+  border-top:1px solid var(--line);
+  padding:48px 0 40px;
+}
+.footer-inner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.footer-brand .logo{ font-size:1rem; }
+.footer-brand p{
+  font-size:.82rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin-top:8px;
+}
+.footer-social{
+  display:flex;
+  gap:26px;
+  list-style:none;
+  font-size:.85rem;
+}
+.footer-social a{ color:var(--muted); transition:color .2s ease; }
+.footer-social a:hover{ color:var(--accent); }
+
+.footer-bottom{
+  margin-top:34px;
+  padding-top:26px;
+  border-top:1px solid var(--line);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  font-size:.78rem;
+  color:#6E6E77;
+}
+
+/* ============================================================
+   15. LIGHTBOX MODAL
+   ============================================================ */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:24px;
+  background:rgba(6,6,7,.94);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .28s ease, visibility .28s ease;
+}
+.modal.open{ opacity:1; visibility:visible; }
+
+.modal img{
+  max-width:min(1100px, 94vw);
+  max-height:80vh;
+  width:auto;
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.14);
+  transform:scale(.96);
+  transition:transform .32s cubic-bezier(.2,.7,.3,1);
+}
+.modal.open img{ transform:scale(1); }
+
+.modal-caption{
+  font-size:.85rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+}
+.modal-caption:empty{ display:none; }
+
+.modal-close{
+  position:absolute;
+  top:22px; right:24px;
+  width:46px; height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.05);
+  font-size:1.3rem;
+  line-height:1;
+  color:#fff;
+  transition:background .25s ease, transform .25s ease, border-color .25s ease;
+}
+.modal-close:hover{
+  background:var(--accent);
+  border-color:var(--accent);
+  transform:rotate(90deg);
+}
+
+/* ============================================================
+   16. SCROLL REVEAL
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+  will-change:opacity, transform;
+}
+.reveal.visible{ opacity:1; transform:none; }
+
+/* ============================================================
+   17. RESPONSIVE
+   ============================================================ */
+@media (max-width: 1000px){
+  .hero-grid{ grid-template-columns:1fr; gap:48px; }
+  .hero{ padding:64px 0 84px; }
+  .about-grid{ grid-template-columns:1fr; }
+  .about-visual{ order:-1; }
+  .about-visual img{ aspect-ratio:16/9; }
+}
+
+@media (max-width: 860px){
+  section{ padding:76px 0; }
+
+  .menu-toggle{ display:block; }
+  .nav-cta{ display:none; }
+
+  .nav-links{
+    position:fixed;
+    top:var(--nav-h);
+    left:0; right:0;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:8px 24px 28px;
+    background:#0E0E10;
+    border-bottom:1px solid var(--line);
+    transform:translateY(-140%);
+    transition:transform .38s cubic-bezier(.4,0,.2,1);
+    z-index:99;
+  }
+  .nav-links.open{ transform:translateY(0); }
+  .nav-links li{ list-style:none; }
+  .nav-links a{
+    display:block;
+    padding:15px 0;
+    font-size:1rem;
+    color:var(--text);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav-links a::after{ display:none; }
+  .nav-links a.active{ color:var(--accent); }
+}
+
+@media (max-width: 700px){
+  .ba-grid{ grid-template-columns:1fr; }
+  .ba-item{ margin-bottom:44px; }
+  .stats{ gap:32px; }
+  .footer-inner{ flex-direction:column; align-items:flex-start; }
+}
+
+@media (max-width: 420px){
+  .container{ padding-inline:18px; }
+  .btn{ padding:14px 22px; font-size:.88rem; }
+  .hero-actions .btn{ flex:1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ transition-duration:.001ms !important; animation-duration:.001ms !important; }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="logo" aria-label="HARMAN — home">HARMAN Sindha</a>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a href="#contact" class="btn btn-primary btn-sm nav-cta">Let's Work</a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+
+      <div class="hero-text reveal">
+        <span class="eyebrow">YouTube Thumbnail Designer</span>
+        <h1>Thumbnails that <span class="accent">get attention.</span></h1>
+        <p class="sub">I create bold, high-quality YouTube thumbnails designed to make your videos stand out and get more clicks.</p>
+
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">View My Work</a>
+          <a href="#contact" class="btn btn-ghost">Let's Work Together</a>
+        </div>
+      </div>
+
+      <!-- HERO COLLAGE -->
+      <div class="collage reveal" aria-label="Thumbnail design showcase">
+        <figure>
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/ugwhpp" alt="Bold YouTube thumbnail design example">
+          </div>
+        </figure>
+        <figure>
+          <div class="thumb-16x9">
+            <img src="https://picsum.photos/seed/harman-hero-2/640/360" alt="Gaming YouTube thumbnail design example">
+          </div>
+        </figure>
+        <figure>
+          <div class="thumb-16x9">
+            <img src="https://picsum.photos/seed/harman-hero-3/640/360" alt="Vlog YouTube thumbnail design example">
+          </div>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PORTFOLIO / MY WORK
+       ============================================================ -->
+  <section id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Portfolio</span>
+        <h2>My Best Work</h2>
+      </div>
+
+      <div class="work-grid">
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="FINANCE / INVESTING - Paisa Se Paisa Kaise Banaye?" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/hagx3s" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="PERSONAL FINANCE - Middle Class Money Traps" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/hst7dq" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="WEALTH CREATION - Pehla 1 Crore Kaise Kamaye?" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/vd6iwo" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="PRODUCTIVITY - Master Your Focus" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/mxngmo" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="PERSONAL FINANCE - How Lifestyle Inflation Kills Your Savings" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/6fpzan" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="PRODUCTIVITY - How Screen Addiction Is Destroying Your Brain" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/y82k3u" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Recipe Series — Food" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/ckw9q7" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Travel Diaries — Travel" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/bjzvzs" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/q4otja" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/un2vks" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/03iad2" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/5c7sss" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/bfh404" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/jrxzem" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+
+        <article class="work-card reveal" tabindex="0" role="button" data-title="Crypto Explained — Crypto" aria-label="Open thumbnail">
+          <div class="thumb-16x9">
+            <img src="https://imgh.in/host/jrxzem" alt="thumbnail" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BEFORE / AFTER
+       ============================================================ -->
+  <section id="before-after">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Redesigns</span>
+        <h2>From Good To Click-Worthy</h2>
+      </div>
+
+      <div class="ba-item reveal">
+        <h3 class="ba-title">Tech Review — Redesign 01</h3>
+        <div class="ba-grid">
+          <div class="ba-card">
+            <span class="ba-label">Before</span>
+            <div class="thumb-16x9">
+              <img src="https://picsum.photos/seed/harman-ba1-before/960/540" alt="Original thumbnail before redesign" loading="lazy">
+            </div>
+          </div>
+          <div class="ba-card">
+            <span class="ba-label after">After</span>
+            <div class="thumb-16x9">
+              <img src="https://picsum.photos/seed/harman-ba1-after/960/540" alt="Redesigned thumbnail after redesign" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item reveal">
+        <h3 class="ba-title">Fitness Series — Redesign 02</h3>
+        <div class="ba-grid">
+          <div class="ba-card">
+            <span class="ba-label">Before</span>
+            <div class="thumb-16x9">
+              <img src="https://picsum.photos/seed/harman-ba2-before/960/540" alt="Original thumbnail before redesign" loading="lazy">
+            </div>
+          </div>
+          <div class="ba-card">
+            <span class="ba-label after">After</span>
+            <div class="thumb-16x9">
+              <img src="https://picsum.photos/seed/harman-ba2-after/960/540" alt="Redesigned thumbnail after redesign" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-item reveal">
+        <h3 class="ba-title">Gaming Channel — Redesign 03</h3>
+        <div class="ba-grid">
+          <div class="ba-card">
+            <span class="ba-label">Before</span>
+            <div class="thumb-16x9">
+              <img src="https://picsum.photos/seed/harman-ba3-before/960/540" alt="Original thumbnail before redesign" loading="lazy">
+            </div>
+          </div>
+          <div class="ba-card">
+            <span class="ba-label after">After</span>
+            <div class="thumb-16x9">
+              <img src="https://picsum.photos/seed/harman-ba3-after/960/540" alt="Redesigned thumbnail after redesign" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+       ============================================================ -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Services</span>
+        <h2>What I Do</h2>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <span class="service-num">01</span>
+          <h3>YouTube Thumbnails</h3>
+          <p>I create eye-catching thumbnails designed around your video's topic and audience.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-num">02</span>
+          <h3>Thumbnail Redesign</h3>
+          <p>I transform weak or outdated thumbnails into stronger, more clickable designs.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-num">03</span>
+          <h3>Monthly Thumbnail Package</h3>
+          <p>Consistent thumbnail design support for creators who upload regularly.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section id="about">
+    <div class="container about-grid">
+
+      <div class="about-text reveal">
+        <span class="eyebrow">Who I Am</span>
+        <h2>About Me</h2>
+        <p style="margin-top:26px;">Hi, I'm Harman, a thumbnail designer focused on creating attention-grabbing YouTube thumbnails that help creators stand out.</p>
+
+        <div class="stats">
+          <div class="stat"><strong>500+</strong><span>Thumbnails</span></div>
+          <div class="stat"><strong>3+</strong><span>Years Experience</span></div>
+          <div class="stat"><strong>40+</strong><span>Happy Creators</span></div>
+        </div>
+      </div>
+
+      <div class="about-visual reveal">
+        <img src="https://imgh.in/host/lyuav7" alt="Thumbnail design workspace" loading="lazy">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+       ============================================================ -->
+       
+       <!------(TESTIMONIALS Deactivated)------!>
+       
+       <!------(<section id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Testimonials</span>
+        <h2>What Creators Say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <figure class="testimonial reveal">
+          <blockquote>Harman's thumbnails completely changed my channel. My click-through rate jumped within the first two weeks of working together.</blockquote>
+          <figcaption>
+            <strong>Client Name 1</strong>
+            <span>Tech YouTuber · 250K Subscribers</span>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial reveal">
+          <blockquote>Fast delivery, clean communication and designs that actually match my brand. Easily the best designer I've worked with so far.</blockquote>
+          <figcaption>
+            <strong>Client Name 2</strong>
+            <span>Gaming Creator · 120K Subscribers</span>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial reveal">
+          <blockquote>The redesigns made my older videos look brand new. Views went up and my channel finally looks consistent and professional.</blockquote>
+          <figcaption>
+            <strong>Client Name 3</strong>
+            <span>Fitness Creator · 80K Subscribers</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>)------!>
+       
+       
+
+       
+  
+
+  <!-- ============================================================
+       CONTACT / CTA
+       ============================================================ -->
+  <section id="contact" class="cta">
+    <div class="container reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Let's Make Your Next Video Stand Out.</h2>
+      <p>Need a thumbnail that grabs attention? Let's work together.</p>
+
+      <div class="cta-actions">
+        <a href="https://wa.me/YOURNUMBER" class="btn btn-primary" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/YOURUSERNAME" class="btn btn-ghost" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:YOUR@email.com" class="btn btn-ghost">Email Me</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo">HARMAN Sindha</span>
+        <p>Thumbnail Designer</p>
+      </div>
+
+      <ul class="footer-social">
+        <li><a href="https://wa.me/YOURNUMBER" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://instagram.com/YOURUSERNAME" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:YOUR@email.com">Email</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Harman Sindha. All rights reserved.</span>
+      <span>Designed By Harman Sindha</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     LIGHTBOX MODAL
+     ============================================================ -->
+<div class="modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Thumbnail preview">
+  <button class="modal-close" id="modalClose" aria-label="Close preview">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+  <p class="modal-caption" id="lightboxCaption"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* 1. MOBILE MENU */
+  var menuToggle = document.getElementById('menuToggle');
+  var navLinks   = document.getElementById('navLinks');
+
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    menuToggle.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  menuToggle.addEventListener('click', function () {
+    var isOpen = navLinks.classList.toggle('open');
+    menuToggle.classList.toggle('active', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinks.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 860) closeMenu();
+  });
+
+  /* 2. LIGHTBOX MODAL
+     Note: caption blank rakhi hai — sirf image preview dikhega.
+     Agar caption chahiye toh niche `card.getAttribute('data-title')` use kar lena. */
+  var modal      = document.getElementById('lightbox');
+  var modalImg   = document.getElementById('lightboxImg');
+  var modalCap   = document.getElementById('lightboxCaption');
+  var modalClose = document.getElementById('modalClose');
+
+  function openModal(src, caption) {
+    modalImg.src = src;
+    modalImg.alt = caption || 'Thumbnail preview';
+    modalCap.textContent = '';   // ← caption hata diya
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modalClose.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    modalImg.src = '';
+  }
+
+  document.querySelectorAll('.work-card').forEach(function (card) {
+    var img = card.querySelector('img');
+    if (!img) return;
+
+    card.addEventListener('click', function () {
+      openModal(img.getAttribute('src'), '');
+    });
+
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  /* 3. SCROLL REVEAL */
+  var revealEls = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* 4. ACTIVE NAV LINK */
+  var sections   = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var ticking    = false;
+
+  function updateActiveLink() {
+    var scrollPos = window.scrollY + 140;
+    var currentId = '';
+
+    sections.forEach(function (section) {
+      if (section.offsetTop <= scrollPos) currentId = section.id;
+    });
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 && sections.length) {
+      currentId = sections[sections.length - 1].id;
+    }
+
+    navAnchors.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+    });
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        updateActiveLink();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateActiveLink();
+
+})();
+</script>
+
+</body>
+</html>
